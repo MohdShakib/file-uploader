@@ -2,7 +2,8 @@
     "use strict";
 
     var config = {
-        uploadUrl: 'https://www.google.com/upload',
+        uploadUrl: '/upload',
+        maxSize: '1000',  // size in kb
         allowedExtensions: ['image/png','image/jpg', 'image/jpeg', 'application/pdf']
     }
 
@@ -31,6 +32,13 @@
             // loop through all the selected files
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
+
+                if(file.size > config.maxSize*1000){
+                    alert('File Size Exceeded ! Please retry.');
+                    showNotification(true, false, 'File Size Exceeded ! Please retry.');
+                    return;
+                }
+
                 if(config.allowedExtensions.indexOf(file.type) >=0 ){
                     if(file.type.indexOf('image') != -1){
                         previewImage(file);
@@ -54,14 +62,15 @@
         showNotification(false, true);
     }
 
-    function showNotification(error, reset){
+    function showNotification(error, reset, message){
         if(setTimeoutVar){
             clearTimeout(setTimeoutVar);
         }
-        let className = 'success',
-            message = 'File uploaded successfully.';
+        let className = 'success';
+
+        message = message || 'File uploaded successfully.';
         if(error){
-            message     = 'Some error occured, Please check API !';
+            message     = message || 'Some error occured, Please check API !';
             className   = 'error';
         }else if(reset){
             message = className = '';
@@ -107,7 +116,7 @@
             if (this.readyState == 4) {
                 //if (this.status === 200) {
                     console.log(['xhr upload complete', e]);
-                //     showNotification();
+                    showNotification();
                 // }else {
                 //     resetProgressBar();
                 //     showNotification(true);
