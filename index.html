@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>File Uploader</title>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link href="styles/styles.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h2>File Uploader</h2>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"></div>
+            </div>
+            <div id="notification-msg"></div>
+            <button class="btn btn-lg upload-btn" type="button">Upload File</button>
+            <div>supported extns: <strong class="extensions-msg"></strong></div>
+            <div class="text-center">You can modify the list from config</div>
+          </div>
+        </div>
+        <div class="panel panel-footer">
+            <div>Preview For the image that you upload</div>
+            <img id="prev-image" src="#" alt="your image"  class="hide" height="250" width="300"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <input id="upload-input" type="file" name="uploads[]" ></br>
+  <script async defer src="scripts/fileUpload.js"></script>
+</body>
+</html>
